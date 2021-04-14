@@ -4,9 +4,7 @@
 
 ## Requirements
 
-Before running this example make sure you got installed `node`, `npm`, `tsc` and all
-required modules from `package.json`.
-If you do not have them install them as follows:
+Before running this example make sure you got installed `node`, `npm`, `typescript` and all required modules from `package.json`. If you do not have them install them as follows:
 
 To install `node`, with `npm`, type in:
 
@@ -14,9 +12,9 @@ To install `node`, with `npm`, type in:
 $ sudo apt-get install nodejs -y
 ```
 
-To install `tsc` type in:
+To install `typescript` type in:
 ```Bash
-$ npm i -g tsc
+$ npm i -g typescript
 $ sudo apt-get install node-typescript
 ```
 
