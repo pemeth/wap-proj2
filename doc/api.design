@@ -1,0 +1,20 @@
+Legend:
+<HTTP method>
+	/<main-resource>
+	Main resource description and source.
+	Targets:
+		/<targets>
+		/<of>/<main>
+		/<resource>
+
+GET
+	/beds
+	Hospital bed occupancies for COVID-19 per country.
+	Source: https://data.europa.eu/euodp/en/data/dataset/hospital-and-icu-admission-rates-and-occupancy-for-covid-19
+	Targets:
+		/<country>
+		/<country>/<date>
+		/<country>/<date-start>/<date-end>
+	Where:
+		<country> is a country code (SK, DE, ...).
+		<date> in the form of /<day>/<month>/<year>, where each of the specified fields are integers.
