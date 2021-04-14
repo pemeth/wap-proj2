@@ -4,12 +4,13 @@
 
 ## Requirements
 
-Before running this example make sure you got installed `node`, `npm`, `typescript` and all required modules from `package.json`. If you do not have them install them as follows:
+Before running this example make sure you got installed `node v14.x`, `npm`, `typescript` and all required modules from `package.json`. If you do not have them install them as follows:
 
-To install `node`, with `npm`, type in:
+To install `node v14.x`, with `npm`, type in:
 
 ```Bash
-$ sudo apt-get install nodejs -y
+$ curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+$ sudo apt-get install -y nodejs
 ```
 
 To install `typescript` type in:
