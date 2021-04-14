@@ -17,3 +17,4 @@ GET
 		/<country>/<date-start>/<date-end>
 	Where:
 		<country> is a country code (SK, DE, ...).
+		<date> in the form of /<day>/<month>/<year>, where each of the specified fields are integers.
