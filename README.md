@@ -1,6 +1,6 @@
 # Internet Applications - Web API Covid 19 data
 
-### Authors: Matúš Škuta (xskuta04), Patrik Németh (xnemet)
+### Authors: Matúš Škuta (xskuta04), Patrik Németh (xnemet04)
 
 ## Requirements
 
