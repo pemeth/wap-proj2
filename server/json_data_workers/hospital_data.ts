@@ -66,7 +66,7 @@ export class HospitalDataWorker {
     public getBedDataByCountry(country_code: string): Promise<BedDatas> {
         return new Promise<BedDatas>((resolve, reject) => {
             const country: string | null = this.countryCodeToCountry(country_code);
-            
+
             // Country not found
             if (country === null) {
                 return reject();
@@ -81,7 +81,7 @@ export class HospitalDataWorker {
     public getBedDataByCountryDate(country_code: string, date: Date): Promise<BedDatas> {
         return new Promise<BedDatas>((resolve, reject) => {
             const country: string | null = this.countryCodeToCountry(country_code);
-                
+
             // Country not found
             if (country === null) {
                 return reject();
@@ -96,7 +96,7 @@ export class HospitalDataWorker {
     public getBedDataByCountryDateFromTo(country_code: string, date_from: Date, date_to: Date): Promise<BedDatas> {
         return new Promise<BedDatas>((resolve, reject) => {
             const country: string | null = this.countryCodeToCountry(country_code);
-                
+
             // Country not found
             if (country === null) {
                 return reject();
