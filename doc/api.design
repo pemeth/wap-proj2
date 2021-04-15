@@ -29,3 +29,14 @@ GET
 	Where:
 		<country> is a country code (SK, DE, ...).
 		<date> in the form of /<day>/<month>/<year>, where each of the specified fields are integers.
+
+	/tests
+	Weekly COVID-19 testing rates and positivity rates per country and region.
+	Source: https://data.europa.eu/euodp/en/data/dataset/covid-19-testing
+	Targets:
+		/<country>
+		/<country>/<year>/<week>
+	Where:
+		<country> is a country code (SK, DE, ...).
+		<year> is the requested year of data.
+		<week> is the requested week number of the year.
