@@ -1,0 +1,11 @@
+----Hospital bed occupancy----
+[
+    {
+        country: <full country name> (string),
+        date: <date> (string),
+        value: <appropriate value> (int)
+    },
+    .
+    .
+    .
+]
