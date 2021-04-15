@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "https": "^1.0.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.10",
     "@types/country-code-lookup": "0.0.0",
     "@types/express": "^4.17.11",
     "@types/node": "^14.0.4"

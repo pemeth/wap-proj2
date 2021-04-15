@@ -2,6 +2,7 @@ import { container, singleton } from "tsyringe";
 import { Express } from "express-serve-static-core";
 import { json, Response } from "express";
 import { HospitalRouteHandler } from "./HospitalRouteHandler";
+import cors from 'cors';
 
 @singleton()
 export class RouteHandler {
@@ -27,6 +28,7 @@ export class RouteHandler {
 
     public adddRoutes(app: Express): void {
         app.use(json());
+        app.use(cors());
 
         this.hospital_route_handler.addRoutes(app);
 
