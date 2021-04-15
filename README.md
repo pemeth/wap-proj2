@@ -21,7 +21,7 @@ $ sudo apt-get install node-typescript
 
 Finnaly to install all required modules, make sure you are in the same directory as `README.md` and type in:
 ```Bash
-$ npm run install
+$ npm run i
 ```
 
 ## Build
