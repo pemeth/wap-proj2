@@ -21,7 +21,7 @@ export class RouteHandler {
                 return resolve();
             })
             .catch(() => {
-                return resolve();
+                return reject();
             });
         });
     }
