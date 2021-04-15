@@ -10,3 +10,18 @@ export interface HospitalData {
 
 export interface HospitalDatas extends Array<HospitalData>{};
 
+export interface BedData {
+    country: string;
+    date: string;
+    value: number;
+};
+
+export interface BedDatas extends Array<BedData>{};
+
+export interface ICUData {
+    country: string;
+    date: string;
+    value: number;
+};
+
+export interface ICUDatas extends Array<ICUData>{};

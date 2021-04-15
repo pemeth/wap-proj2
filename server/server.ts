@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 import { Express } from "express-serve-static-core";
 import { container, singleton } from "tsyringe";
-import { RouteHandler } from "./RouteHandler";
+import { RouteHandler } from "./route_handlers/RouteHandler";
 
 const port: number = 3000;
 
