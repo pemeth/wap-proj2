@@ -1,3 +1,18 @@
+function parseDate(date) {
+    const sections = date.split("-");
+    let sections_new = [];
+
+    for (let item of sections) {
+        if (item.startsWith('0')) {
+            // If starts with 0, remove it.
+            item = item.substring(1);
+        }
+        sections_new.push(item);
+    }
+
+    return sections_new.reverse().join('/');
+}
+
 $(document).ready(function(){
     $("#send_request").click(function() {
         let url = "http://localhost:3000";
@@ -7,6 +22,13 @@ $(document).ready(function(){
         const country = $("#country_select option:selected").val();
         url = url.concat("/");
         url = url.concat(country);
+
+        const date_from = parseDate($("#date_from").val());
+        url = url.concat("/");
+        url = url.concat(date_from);
+        const date_to = parseDate($("#date_to").val());
+        url = url.concat("/");
+        url = url.concat(date_to);
 
         var margin = {top: 30, right: 30, bottom: 70, left: 60},
             width = 460 - margin.left - margin.right,
@@ -21,7 +43,7 @@ $(document).ready(function(){
                 .attr("transform",
                       "translate(" + margin.left + "," + margin.top + ")");
 
-        d3.json(url.concat("/1/11/2020/13/12/2020")) // TODO the dates are hardcoded for debugging purposes
+        d3.json(url)
             .then(function(data) {
                 let x = d3.scaleBand()
                     .range([0,width])
