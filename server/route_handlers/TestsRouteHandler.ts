@@ -4,17 +4,27 @@ import { TestsDataWorker } from "../json_data_workers/tests_data_worker";
 import { Request, Response } from "express";
 import { TestDatas } from "../interfaces/tests_data";
 
+/**
+ * Class that will load data of data workers and add routes to the application
+ */
 @singleton()
 export class TestsRouteHandler {
     private tests_data_worker: TestsDataWorker;
 
+    /**
+     * Instantiate singleton object for holding covid test data
+     */
     constructor() {
         this.tests_data_worker = container.resolve(TestsDataWorker);
     }
 
+    /**
+     * Load data for data worker
+     * @returns {Promise<void>} Returns promise that will be resolved, when data are loaded, or rejected when loading failes
+     */
     public loadData(): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            this.tests_data_worker.loadData('https://opendata.ecdc.europa.eu/covid19/testing/json/')
+            this.tests_data_worker.loadData()
             .then(() => {
                 return resolve();
             })
@@ -24,11 +34,20 @@ export class TestsRouteHandler {
         });
     }
 
+    /**
+     * Add routes to server
+     * @param {Express} app Instance of express web server
+     */
     public addRoutes(app: Express) {
         this.addTestsRoutes(app);
     }
 
+    /**
+     * Add all types of routes that start with /tests
+     * @param {Express} app Instance of express web server
+     */
     private addTestsRoutes(app: Express): void {
+        // Add GET route for /tests/<country>
         app.route('/tests/:country')
             .get((req: Request, res: Response) => {
                 // Country param is missing
@@ -39,7 +58,6 @@ export class TestsRouteHandler {
                 // Return JSON array of datas for given country
                 this.tests_data_worker.getTestDataByCountry(req.params.country)
                 .then((data: TestDatas) => {
-                    res.header("Content-Type",'application/json');
                     return res.json(data);
                 })
                 .catch(() => {
@@ -49,6 +67,7 @@ export class TestsRouteHandler {
                 return;
             });
 
+        // Add GET route for /tests/<country>/<year>/<week>
         app.route('/tests/:country/:year/:week')
             .get((req: Request, res: Response) => {
                 // Country param is missing
@@ -66,7 +85,7 @@ export class TestsRouteHandler {
                     return res.status(400).send();
                 }
 
-                // Return JSON array of datas for given country
+                // Return JSON array of datas for given country and year_week
                 this.tests_data_worker.getTestDataByCountryYearWeek(req.params.country, req.params.year, req.params.week)
                 .then((data: TestDatas) => {
                     return res.json(data);
