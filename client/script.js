@@ -59,7 +59,7 @@ $(document).ready(function() {
                 let x = d3.scaleBand()
                     .range([0,width])
                     .domain(data.map(function(d) { return d.date; }))
-                    .padding(0.2);
+                    .paddingOuter(0.2);
                 svg.append("g")
                     .attr("transform", "translate(0," + height + ")")
                     .call(
