@@ -13,22 +13,33 @@ function parseDate(date) {
     return sections_new.reverse().join('/');
 }
 
-$(document).ready(function(){
-    $("#send_request").click(function() {
-        let url = "http://localhost:3000";
-        const type = $("#type_select option:selected").val();
-        url = url.concat("/");
-        url = url.concat(type);
-        const country = $("#country_select option:selected").val();
-        url = url.concat("/");
-        url = url.concat(country);
+function buildRequestURL() {
+    let url = "http://localhost:3000";
 
-        const date_from = parseDate($("#date_from").val());
+    const type = $("#type_select option:selected").val();
+    url = url.concat("/");
+    url = url.concat(type);
+    const country = $("#country_select option:selected").val();
+    url = url.concat("/");
+    url = url.concat(country);
+
+    const date_from = parseDate($("#date_from").val());
+    if (date_from !== '') {
         url = url.concat("/");
         url = url.concat(date_from);
-        const date_to = parseDate($("#date_to").val());
+    }
+    const date_to = parseDate($("#date_to").val());
+    if (date_to !== '') {
         url = url.concat("/");
         url = url.concat(date_to);
+    }
+
+    return url;
+}
+
+$(document).ready(function() {
+    $("#send_request").click(function() {
+        const url = buildRequestURL();
 
         var margin = {top: 30, right: 30, bottom: 70, left: 60},
             width = 460 - margin.left - margin.right,
