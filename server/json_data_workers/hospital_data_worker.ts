@@ -3,6 +3,8 @@ import { byInternet, CountryCode } from "country-code-lookup";
 import { singleton } from "tsyringe";
 import { BedDatas, BedData, HospitalData, HospitalDatas, ICUDatas, ICUData } from "../interfaces/hospital_data";
 import { HOSPITAL_JSON_PAGE } from "../config";
+import { schedule } from "node-cron";
+import { IncomingMessage } from "node:http";
 
 /**
  * Class holding loaded hospital JSON data, that will filter out and return data based on given conditions
@@ -12,6 +14,7 @@ export class HospitalDataWorker {
     // Class variables
     private hospital_data: BedDatas = [];
     private icu_data: ICUDatas = [];
+    private json_last_modified: Date | null = null;
 
     constructor() { }
 
@@ -36,6 +39,11 @@ export class HospitalDataWorker {
      */
     public loadData(): Promise<void> {
         return new Promise<void>((resolve, reject) => {
+            // Schedule check for new data after 30 minutes
+            schedule('*/30 * * * *', () => {
+                this.updateData();
+            });
+
             // Send get request to page from config.ts
             get(HOSPITAL_JSON_PAGE, (resp) => {
                 let data = '';
@@ -78,6 +86,11 @@ export class HospitalDataWorker {
                         } as ICUData;
                     });
 
+                    // Save date of last modification
+                    if (resp.headers['last-modified'] !== undefined && typeof resp.headers['last-modified'] === 'string') {
+                        this.json_last_modified = new Date(resp.headers['last-modified']);
+                    }
+
                     return resolve();
                 });
 
@@ -87,6 +100,33 @@ export class HospitalDataWorker {
                     return reject();
                 });
         });
+    }
+
+    /**
+     * Check if last-modified header was changed, then load new JSON data
+     */
+    private updateData(): void {
+        // Send HEAD request
+        get(HOSPITAL_JSON_PAGE,
+        {
+            host: 'opendata.ecdc.europa.eu',
+            method: 'HEAD'
+        }, (res: IncomingMessage) => {
+            // Check if last-modified header was set
+            if (res.headers['last-modified'] !== undefined && typeof res.headers['last-modified'] === 'string') {
+                // Compare saved last modified, with new last modified and when they do not match, load new JSON data from server
+                if (this.json_last_modified === null || new Date(res.headers['last-modified']).getTime() !== this.json_last_modified?.getTime()) {
+                    this.loadData()
+                    .catch(() => {
+                        console.error('Failed to update hospital JSON data!, will try again in 30 minutes.');
+                    });
+                    return;
+                }
+            }
+        // When error occurs, log error
+        }).on('error', () => {
+            console.error('Failed to update hospital JSON data!, will try again in 30 minutes.');
+        }).end();
     }
 
     /**
