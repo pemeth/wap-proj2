@@ -42,8 +42,8 @@ $(document).ready(function() {
         const url = buildRequestURL();
 
         var margin = {top: 30, right: 30, bottom: 70, left: 60},
-            width = 460 - margin.left - margin.right,
-            height = 400 - margin.top - margin.bottom;
+            width = d3.select("#dataviz svg").node().getBoundingClientRect().width - margin.left - margin.right,
+            height = d3.select("#dataviz svg").node().getBoundingClientRect().height - margin.top - margin.bottom;
 
         // Remove the previous barplot.
         d3.select("#dataviz svg g").remove();

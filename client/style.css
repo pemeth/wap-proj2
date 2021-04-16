@@ -5,6 +5,8 @@
 #dataviz svg {
     display: block;
     margin: auto;
+    width: 760px;
+    height: 460px;
 }
 
 rect:hover {
