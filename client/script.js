@@ -45,11 +45,11 @@ $(document).ready(function() {
             width = 460 - margin.left - margin.right,
             height = 400 - margin.top - margin.bottom;
 
-        // append the svg object to the body of the page
-        var svg = d3.select("#dataviz")
-            .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
+        // Remove the previous barplot.
+        d3.select("#dataviz svg g").remove();
+
+        // Append the object that will hold the barplot.
+        var svg = d3.select("#dataviz svg")
             .append("g")
                 .attr("transform",
                       "translate(" + margin.left + "," + margin.top + ")");
@@ -75,7 +75,7 @@ $(document).ready(function() {
                     .call(d3.axisLeft(y));
 
                 // Bars
-                svg.selectAll("mybar")
+                svg.selectAll(".bar")
                     .data(data)
                     .enter()
                     .append("rect")
@@ -85,6 +85,7 @@ $(document).ready(function() {
                         .attr("height", function(d) { return height - y(d.value); })
                         .attr("fill", "#69b3a2")
                         .attr("date", function(d) { return d.date; })
+                        .attr("class", "bar")
                         .on("mouseover", function(d) {
                             // On mouseover, show the tooltip.
                             // TODO: maybe figure out how to show it at the mouse's position
