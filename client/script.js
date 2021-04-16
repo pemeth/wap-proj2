@@ -83,7 +83,25 @@ $(document).ready(function() {
                         .attr("y", function(d) { return y(d.value); })
                         .attr("width", x.bandwidth())
                         .attr("height", function(d) { return height - y(d.value); })
-                        .attr("fill", "#69b3a2");
+                        .attr("fill", "#69b3a2")
+                        .attr("date", function(d) { return d.date; })
+                        .on("mouseover", function(d) {
+                            // On mouseover, show the tooltip.
+                            var matrix = this.getScreenCTM()
+                                .translate(+this.getAttribute("cx"),
+                                    +this.getAttribute("cy"));
+
+                            d3.select("#tooltip")
+                                .style("left", (matrix.e) + "px")
+                                .style("top", (matrix.f + 300) + "px")
+                                .select("#value")
+                                .text(d3.select(this).attr("date"));
+                            d3.select("#tooltip").classed("hidden", false);
+                       })
+                       .on("mouseout", function() {
+                            d3.select("#tooltip").classed("hidden", true);
+                       });
+
             });
     });
 });

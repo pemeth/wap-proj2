@@ -5,8 +5,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="./script.js"></script>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+    <!-- Used for showing chart tooltips -->
+    <div id="tooltip" class="hidden">
+        <p><span id="value"></span></p>
+    </div>
+
     <div>
         <select id="type_select">
             <option value="beds">Hospital admissions</option>
