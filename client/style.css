@@ -1,3 +1,12 @@
+#dataviz {
+    margin: auto;
+}
+
+#dataviz svg {
+    display: block;
+    margin: auto;
+}
+
 rect:hover {
     fill: orange;
 }
