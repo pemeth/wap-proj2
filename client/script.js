@@ -72,7 +72,7 @@ $(document).ready(function(){
                         .attr("y", function(d) { return y(d.value); })
                         .attr("width", x.bandwidth())
                         .attr("height", function(d) { return height - y(d.value); })
-                        .attr("fill", "#69b3a2")
+                        .attr("fill", "#69b3a2");
             });
     });
 });
