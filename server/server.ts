@@ -14,7 +14,7 @@ export class Server {
         this.app = express();
         this.route_handler = container.resolve(RouteHandler);
         this.route_handler.adddRoutes(this.app);
-        this.route_handler.load_data_workers()
+        this.route_handler.loadDataWorkers()
         .catch(() => {
             console.error('Failed to load JSON data, exiting');
         })

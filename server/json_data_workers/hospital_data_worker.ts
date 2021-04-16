@@ -12,7 +12,15 @@ export class HospitalDataWorker {
         
     }
 
-    public LoadData(web_page: string): Promise<void> {
+    private checkDataCorrectness(data: HospitalData, indicator: string): boolean {
+        if (data.indicator === undefined || data.country === undefined || data.date === undefined || data.value === undefined) {
+            return false;
+        }
+
+        return data.indicator === indicator;
+    }
+
+    public loadData(web_page: string): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             get(web_page, (resp) => {
                 let data = '';
@@ -29,7 +37,7 @@ export class HospitalDataWorker {
                     // Create new array from received JSON
                     this.hospital_data = Array.from<HospitalData, BedData>(
                         json_data.filter((data: HospitalData) => {
-                            return data.indicator !== undefined && data.indicator === 'Daily hospital occupancy';
+                            return this.checkDataCorrectness(data, 'Daily hospital occupancy');
                         })
                         , (data: HospitalData) => {
                         return {
@@ -42,7 +50,7 @@ export class HospitalDataWorker {
                     // Create new array from received JSON
                     this.icu_data = Array.from<HospitalData, ICUData>(
                         json_data.filter((data: HospitalData) => {
-                            return data.indicator !== undefined && data.indicator === 'Daily ICU occupancy';
+                            return this.checkDataCorrectness(data, 'Daily ICU occupancy');
                         })
                         , (data: HospitalData) => {
                         return {

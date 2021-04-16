@@ -1,5 +1,5 @@
 import { container, singleton } from "tsyringe";
-import { HospitalDataWorker } from "../json_data_workers/hospital_data";
+import { HospitalDataWorker } from "../json_data_workers/hospital_data_worker";
 import { Express } from "express-serve-static-core";
 import { Request, Response } from "express";
 import { BedDatas, ICUDatas } from "../interfaces/hospital_data";
@@ -12,9 +12,9 @@ export class HospitalRouteHandler {
         this.hospital_data_worker = container.resolve(HospitalDataWorker);
     }
 
-    public load_data(): Promise<void> {
+    public loadData(): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            this.hospital_data_worker.LoadData('https://opendata.ecdc.europa.eu/covid19/hospitalicuadmissionrates/json/')
+            this.hospital_data_worker.loadData('https://opendata.ecdc.europa.eu/covid19/hospitalicuadmissionrates/json/')
             .then(() => {
                 return resolve();
             })
