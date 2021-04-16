@@ -62,7 +62,10 @@ $(document).ready(function() {
                     .padding(0.2);
                 svg.append("g")
                     .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x))
+                    .call(
+                        // If the data contains more days than 31, show ticks for the 1.,10. and 20. days of each month.
+                        data.length > 31 ? d3.axisBottom(x).tickFormat(x => /202.-..-(01|10|20)/.test(x) ? x : "") : d3.axisBottom(x)
+                    )
                     .selectAll("text")
                         .attr("transform", "translate(-10,0)rotate(-50)")
                         .style("text-anchor", "end");
