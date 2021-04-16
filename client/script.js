@@ -87,6 +87,7 @@ $(document).ready(function() {
                         .attr("date", function(d) { return d.date; })
                         .on("mouseover", function(d) {
                             // On mouseover, show the tooltip.
+                            // TODO: maybe figure out how to show it at the mouse's position
                             var matrix = this.getScreenCTM()
                                 .translate(+this.getAttribute("cx"),
                                     +this.getAttribute("cy"));
