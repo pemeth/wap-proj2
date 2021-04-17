@@ -1,7 +1,13 @@
+/* General/miscellaneous styles. */
 body {
     background-color: #558e90;
 }
 
+.hidden {
+    display: none;
+}
+
+/* Styles for the top of the page. */
 #top_row_container {
     width: 100%;
     text-align: center;
@@ -19,11 +25,6 @@ body {
     border-radius: 5%;
     background-color: #69b3a2;
     text-decoration: none;
-}
-
-.category_options {
-    height: 4em;
-    background-color: chocolate; /* TODO just a placeholding color */
 }
 
 #country_select_container {
@@ -44,6 +45,12 @@ body {
     outline: none;
 }
 
+.category_options {
+    height: 4em;
+    background-color: chocolate; /* TODO just a placeholding color */
+}
+
+/* Styles for the data visualization section. */
 #dataviz {
     margin: auto;
 }
@@ -72,10 +79,6 @@ rect:hover {
     -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
     pointer-events: none;
-}
-
-.hidden {
-    display: none;
 }
 
 #tooltip p {
