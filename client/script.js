@@ -28,6 +28,10 @@ function buildRequestURL() {
         url = url.concat("/");
         url = url.concat(date_from);
     }
+    // TODO If end date is not specified, get current date
+    // and put that as the "date_to" api argument.
+    // If ONLY end date is specified, construct call, so that only
+    // that day is returned.
     const date_to = parseDate($("#date_to").val());
     if (date_to !== '') {
         url = url.concat("/");
