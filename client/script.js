@@ -48,6 +48,23 @@ function buildRequestURLTests() {
     url = url.concat("/");
     url = url.concat(country);
 
+    const year = $("#tests_year_select option:selected").val(),
+        week = $("#tests_week_select option:selected").val();
+
+    if (year !== "all" && week === "whole_year") {
+        // Specific year, with every week.
+        url = url.concat("/");
+        url = url.concat(year);
+    }
+
+    if (year !== "all" && week !== "whole_year") {
+        // Specific year with specific week
+        url = url.concat("/");
+        url = url.concat(year);
+        url = url.concat("/");
+        url = url.concat(week);
+    }
+
     return url;
 }
 
