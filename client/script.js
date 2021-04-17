@@ -38,6 +38,20 @@ function buildRequestURL() {
 }
 
 $(document).ready(function() {
+    $("#category_selector_hospital").click(function() {
+        d3.select("#category_hospital").classed("hidden", false);
+        d3.select("#category_tests").classed("hidden", true);
+    });
+});
+
+$(document).ready(function() {
+    $("#category_selector_tests").click(function() {
+        d3.select("#category_tests").classed("hidden", false);
+        d3.select("#category_hospital").classed("hidden", true);
+    });
+});
+
+$(document).ready(function() {
     $("#send_request").click(function() {
         hospitalPlot();
     });
@@ -114,3 +128,17 @@ function hospitalPlot() {
 
         });
 }
+
+// This client app was developped on firefox, where input type "week" does not work,
+// so I just threw this in here.
+// From https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week
+$(document).ready(function() {
+    for (let i = 1; i <= 53; i++) {
+        const val = (i < 10) ? ("0" + i) : i;
+
+        d3.select("#tests_week_select")
+            .append("option")
+                .attr("value", val)
+                .text(val);
+    }
+});

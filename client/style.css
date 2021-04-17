@@ -1,3 +1,31 @@
+body {
+    background-color: #558e90;
+}
+
+#category_selector_container {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    background-color: transparent;
+}
+
+.category_selector {
+    display: inline-block;
+    font-size: large;
+    width: 10em;
+    padding: 1em 1em 1em 1em;
+    margin: 0 4em;
+    border: none;
+    border-radius: 5%;
+    background-color: #69b3a2;
+    text-decoration: none;
+}
+
+.category_options {
+    height: 4em;
+    background-color: chocolate; /* TODO just a placeholding color */
+}
+
 #dataviz {
     margin: auto;
 }
@@ -28,7 +56,7 @@ rect:hover {
     pointer-events: none;
 }
 
-#tooltip.hidden {
+.hidden {
     display: none;
 }
 
