@@ -67,6 +67,31 @@ export class TestsRouteHandler {
                 return;
             });
 
+        // Add GET route for /tests/<country>/<year>
+        app.route('/tests/:country/:year')
+            .get((req: Request, res: Response) => {
+                // Country param is missing
+                if (req.params.country === undefined || typeof req.params.country !== 'string') {
+                    return res.status(400).send();
+                }
+
+                // Year param is missing
+                if (req.params.year === undefined || typeof req.params.year !== 'string') {
+                    return res.status(400).send();
+                }
+
+                // Return JSON array of datas for given country and year
+                this.tests_data_worker.getTestDataByCountryYear(req.params.country, req.params.year)
+                .then((data: TestDatas) => {
+                    return res.json(data);
+                })
+                .catch(() => {
+                    return res.status(400).send();
+                });
+
+                return;
+            });
+
         // Add GET route for /tests/<country>/<year>/<week>
         app.route('/tests/:country/:year/:week')
             .get((req: Request, res: Response) => {

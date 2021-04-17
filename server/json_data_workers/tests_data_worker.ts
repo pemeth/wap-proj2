@@ -145,6 +145,28 @@ export class TestsDataWorker {
     }
 
     /**
+     * Filter out covid test data based on country code and year
+     * @param {string} country_code Country code representing country (SK, CZ, ...)
+     * @param {string} year Year from which we want given data
+     * @returns {Promise<TestDatas>} Resolves when country code and year are valid, and return array of TestData, reject otherwise
+     */
+    public getTestDataByCountryYear(country_code: string, year: string): Promise<TestDatas> {
+        return new Promise<TestDatas>((resolve, reject) => {
+            // Convert country code into country name
+            const country: string | null = this.countryCodeToCountry(country_code);
+            // Invalid country code or year and week
+            if (country === null) {
+                return reject();
+            }
+
+            // Filter out array of TestData that are from given country and from given year
+            return resolve(this.test_data.filter((data: TestData) => {
+                return data.country.toLowerCase() === country && data.year_week.indexOf(year) === 0;
+            }));
+        });
+    }
+
+    /**
      * Filter out covid test data based on country code and given year and week
      * @param {string} country_code Country code representing country (SK, CZ, ...)
      * @param {string} year Year from which we want given data
