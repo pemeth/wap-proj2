@@ -214,7 +214,7 @@ function testsPlot() {
                     .attr("class", "bar")
                     .on("mouseover", function(d) {
                         // On mouseover, show the tooltip.
-                        // TODO: maybe figure out how to show it at the mouse's position
+                        // TODO: same as in hospitalPlot()
                         var matrix = this.getScreenCTM()
                             .translate(+this.getAttribute("cx"),
                                 +this.getAttribute("cy"));
