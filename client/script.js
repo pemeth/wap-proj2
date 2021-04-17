@@ -24,18 +24,35 @@ function buildRequestURL() {
     url = url.concat(country);
 
     const date_from = parseDate($("#date_from").val());
-    if (date_from !== '') {
-        url = url.concat("/");
-        url = url.concat(date_from);
-    }
-    // TODO If end date is not specified, get current date
-    // and put that as the "date_to" api argument.
-    // If ONLY end date is specified, construct call, so that only
-    // that day is returned.
     const date_to = parseDate($("#date_to").val());
-    if (date_to !== '') {
+
+    if (date_from === '' && date_to !== '') {
+        // Only end date is specified, return just that day.
         url = url.concat("/");
         url = url.concat(date_to);
+
+        return url;
+    }
+
+    if (date_from !== '' && date_to !== '') {
+        // Start and end date specified.
+        url = url.concat("/");
+        url = url.concat(date_from);
+        url = url.concat("/");
+        url = url.concat(date_to);
+    } else if (date_from !== '' && date_to === '') {
+        // Only starting date specified.
+        url = url.concat("/");
+        url = url.concat(date_from);
+
+        // Get today's date.
+        let today = new Date();
+        today = "/" +
+                String(today.getDate()).padStart(2, '0') + "/" +
+                String(today.getMonth() + 1).padStart(2, '0') + "/" +
+                String(today.getFullYear());
+
+        url = url.concat(today);
     }
 
     return url;
