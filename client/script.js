@@ -160,7 +160,7 @@ function testsPlot() {
     // The API returns multiple datapoints for each week, so we need
     // to pick one client side. This returns the type of data the user
     // wants to see.
-    const data_type = d3.select("#data_type").node().value;
+    const data_point = d3.select("#data_point").node().value;
 
     const url = buildRequestURLTests();
 
@@ -186,11 +186,11 @@ function testsPlot() {
              * @param obj an object of the incoming json.
              *
              * Float values are serialized as strings in the JSON. This function returns a float
-             * or int based on how the value of the data point (accessed by `data_type`)
+             * or int based on how the value of the data point (accessed by `data_point`)
              * in the object is serialized.
              */
             const getValue = obj => {
-                return (typeof obj[data_type] === "string" ? parseFloat(obj[data_type]) : obj[data_type]);
+                return (typeof obj[data_point] === "string" ? parseFloat(obj[data_point]) : obj[data_point]);
             };
 
             // Maximum value based on user selected datapoint (data type).
@@ -208,7 +208,7 @@ function testsPlot() {
                     .attr("x", function(d) { return x(d.year_week); })
                     .attr("y", function(d) { return y(getValue(d)); })
                     .attr("width", x.bandwidth())
-                    .attr("height", function(d) { return height - y(d[data_type]); })
+                    .attr("height", function(d) { return height - y(d[data_point]); })
                     .attr("fill", "#69b3a2")
                     .attr("date", function(d) { return d.year_week; })
                     .attr("class", "bar")
