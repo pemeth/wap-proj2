@@ -13,9 +13,44 @@
         <p><span id="value"></span></p>
     </div>
 
-    <div id="category_selector_container">
-        <button id="category_selector_hospital" class="category_selector">Hospitals</button>
-        <button id="category_selector_tests" class="category_selector">Tests</button>
+    <div id="top_row_container">
+        <button id="category_selector_hospital" class="category_selector top_row_box">Hospitals</button>
+        <div id="country_select_container">
+            <select id="country_select" class="top_row_box">
+                <!-- TODO Maybe use lowercase letters? API calls should be
+                    lowercase. If changed, the server should be modified
+                    to accomodate this change (particularly CZ, which does
+                    not accept lowercase). -->
+                <option value="AT">Austria</option>
+                <option value="BE">Belgium</option>
+                <option value="BG">Bulgaria</option>
+                <option value="HR">Croatia</option>
+                <option value="CY">Cyprus</option>
+                <option value="CZ">Czechia</option>
+                <option value="DK">Denmark</option>
+                <option value="EE">Estonia</option>
+                <option value="FI">Finland</option>
+                <option value="FR">France</option>
+                <option value="DE">Germany</option>
+                <option value="GR">Greece</option>
+                <option value="HU">Hungary</option>
+                <option value="IE">Ireland</option>
+                <option value="IT">Italy</option>
+                <option value="LV">Latvia</option>
+                <option value="LT">Lithuania</option>
+                <option value="LU">Luxembourg</option>
+                <option value="MT">Malta</option>
+                <option value="NL">Netherlands</option>
+                <option value="PL">Poland</option>
+                <option value="PT">Portugal</option>
+                <option value="RO">Romania</option>
+                <option value="SK">Slovakia</option>
+                <option value="SI">Slovenia</option>
+                <option value="ES">Spain</option>
+                <option value="SE">Sweden</option>
+            </select>
+        </div>
+        <button id="category_selector_tests" class="category_selector top_row_box">Tests</button>
     </div>
 
     <div id="category_hospital" class="category_options">
@@ -23,75 +58,12 @@
             <option value="beds">Hospital admissions</option>
             <option value="icu">ICU admissions</option>
         </select>
-        <select id="country_select">
-            <!-- TODO Maybe use lowercase letters? API calls should be
-                lowercase. If changed, the server should be modified
-                to accomodate this change (particularly CZ, which does
-                not accept lowercase). -->
-            <option value="AT">Austria</option>
-            <option value="BE">Belgium</option>
-            <option value="BG">Bulgaria</option>
-            <option value="HR">Croatia</option>
-            <option value="CY">Cyprus</option>
-            <option value="CZ">Czechia</option>
-            <option value="DK">Denmark</option>
-            <option value="EE">Estonia</option>
-            <option value="FI">Finland</option>
-            <option value="FR">France</option>
-            <option value="DE">Germany</option>
-            <option value="GR">Greece</option>
-            <option value="HU">Hungary</option>
-            <option value="IE">Ireland</option>
-            <option value="IT">Italy</option>
-            <option value="LV">Latvia</option>
-            <option value="LT">Lithuania</option>
-            <option value="LU">Luxembourg</option>
-            <option value="MT">Malta</option>
-            <option value="NL">Netherlands</option>
-            <option value="PL">Poland</option>
-            <option value="PT">Portugal</option>
-            <option value="RO">Romania</option>
-            <option value="SK">Slovakia</option>
-            <option value="SI">Slovenia</option>
-            <option value="ES">Spain</option>
-            <option value="SE">Sweden</option>
-        </select>
         <input type="date" id="date_from" min="2020-01-01"/>
         <input type="date" id="date_to"/>
         <button id="send_request">Submit</button>
     </div>
 
     <div id="category_tests" class="hidden category_options">
-        <select id="country_select_tests">
-            <!-- TODO somehow get rid of this duplication -->
-            <option value="AT">Austria</option>
-            <option value="BE">Belgium</option>
-            <option value="BG">Bulgaria</option>
-            <option value="HR">Croatia</option>
-            <option value="CY">Cyprus</option>
-            <option value="CZ">Czechia</option>
-            <option value="DK">Denmark</option>
-            <option value="EE">Estonia</option>
-            <option value="FI">Finland</option>
-            <option value="FR">France</option>
-            <option value="DE">Germany</option>
-            <option value="GR">Greece</option>
-            <option value="HU">Hungary</option>
-            <option value="IE">Ireland</option>
-            <option value="IT">Italy</option>
-            <option value="LV">Latvia</option>
-            <option value="LT">Lithuania</option>
-            <option value="LU">Luxembourg</option>
-            <option value="MT">Malta</option>
-            <option value="NL">Netherlands</option>
-            <option value="PL">Poland</option>
-            <option value="PT">Portugal</option>
-            <option value="RO">Romania</option>
-            <option value="SK">Slovakia</option>
-            <option value="SI">Slovenia</option>
-            <option value="ES">Spain</option>
-            <option value="SE">Sweden</option>
-        </select>
         <select id="data_point">
             <option value="new_cases">New cases</option>
             <option value="tests_done">Tests done</option>

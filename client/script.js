@@ -40,7 +40,7 @@ function buildRequestURL() {
 function buildRequestURLTests() {
     let url = "http://localhost:3000/tests";
 
-    const country = $("#country_select_tests option:selected").val();
+    const country = $("#country_select option:selected").val();
     url = url.concat("/");
     url = url.concat(country);
 
