@@ -239,7 +239,7 @@ function setBarMouseOverEvent(obj) {
         .select("#value")
         .text(d3.select(obj).attr("date") +
             " : " +
-            d3.select(obj).attr("val"));
+            d3.format(".2~f")(d3.select(obj).attr("val")));
     d3.select("#tooltip").classed("hidden", false);
 }
 
