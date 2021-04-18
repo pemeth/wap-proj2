@@ -144,6 +144,7 @@ function hospitalPlot() {
                     .attr("height", function(d) { return height - y(d.value); })
                     .attr("fill", "#69b3a2")
                     .attr("date", function(d) { return d.date; })
+                    .attr("val", function(d) { return d.value; })
                     .attr("class", "bar")
                     .on("mouseover", function(d) {
                         // On mouseover, show the tooltip.
@@ -156,7 +157,9 @@ function hospitalPlot() {
                             .style("left", (matrix.e) + "px")
                             .style("top", (matrix.f + 300) + "px")
                             .select("#value")
-                            .text(d3.select(this).attr("date"));
+                            .text(d3.select(this).attr("date") +
+                                " : " +
+                                d3.select(this).attr("val"));
                         d3.select("#tooltip").classed("hidden", false);
                    })
                    .on("mouseout", function() {
@@ -216,6 +219,7 @@ function testsPlot() {
                     .attr("height", function(d) { return height - y(d[data_point]); })
                     .attr("fill", "#69b3a2")
                     .attr("date", function(d) { return d.year_week; })
+                    .attr("val", function(d) { return String(getValue(d)); })
                     .attr("class", "bar")
                     .on("mouseover", function(d) {
                         // On mouseover, show the tooltip.
@@ -228,7 +232,9 @@ function testsPlot() {
                             .style("left", (matrix.e) + "px")
                             .style("top", (matrix.f + 300) + "px")
                             .select("#value")
-                            .text(d3.select(this).attr("date"));
+                            .text(d3.select(this).attr("date") +
+                                " : " +
+                                d3.select(this).attr("val"));
                         d3.select("#tooltip").classed("hidden", false);
                    })
                    .on("mouseout", function() {
