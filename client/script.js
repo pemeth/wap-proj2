@@ -220,12 +220,10 @@ function testsPlot() {
                     .style("text-anchor", "end");
 
             /**
-             * @function getValue
-             * @param obj an object of the incoming json.
-             *
              * Float values are serialized as strings in the JSON. This function returns a float
              * or int based on how the value of the data point (accessed by `data_point`)
              * in the object is serialized.
+             * @param obj an object of the incoming json.
              */
             const getValue = obj => {
                 return (typeof obj[data_point] === "string" ? parseFloat(obj[data_point]) : obj[data_point]);
