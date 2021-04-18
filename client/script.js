@@ -157,6 +157,7 @@ function hospitalPlot() {
                 .call(d3.axisLeft(y));
 
             // Bars
+            // TODO repeated code
             svg.selectAll(".bar")
                 .data(data)
                 .enter()
