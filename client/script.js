@@ -156,6 +156,10 @@ function hospitalPlot() {
             svg.append("g")
                 .call(d3.axisLeft(y));
 
+            if (data.length == 0) {
+                showNoData();
+            }
+
             // Bars
             // TODO repeated code
             svg.selectAll(".bar")
@@ -224,6 +228,10 @@ function testsPlot() {
             svg.append("g")
                 .call(d3.axisLeft(y));
 
+            if (data.length == 0) {
+                showNoData();
+            }
+
             svg.selectAll(".bar")
                 .data(data)
                 .enter()
@@ -282,7 +290,7 @@ function setUpSVG() {
         height = d3.select("#dataviz svg").node().getBoundingClientRect().height - margin.top - margin.bottom;
 
     // Remove the previous barplot.
-    d3.select("#dataviz svg g").remove();
+    d3.select("#dataviz svg").selectAll("*").remove();
 
     var svg = d3.select("#dataviz svg")
         .append("g")
@@ -323,6 +331,21 @@ function setUpXScale(width, data, data_point) {
         .paddingOuter(0.2);
 
     return x;
+}
+
+/**
+ * Prints a big "NO DATA" notice into the barplot svg. Called when there
+ * is no data to be shown.
+ */
+ function showNoData() {
+    d3.select("svg")
+    .append("text")
+        .attr("x", "50%")
+        .attr("y", "50%")
+        .attr("dominant-baseline", "middle")
+        .attr("text-anchor", "middle")
+        .style("font-size", "xx-large")
+        .text("NO DATA");
 }
 
 // This client app was developped on firefox, where input type "week" does not work,
