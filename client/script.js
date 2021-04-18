@@ -223,15 +223,19 @@ function testsPlot() {
  * @param {{}} obj is the current HTML object, for which to set this event handler for.
  */
 function setBarMouseOverEvent(obj) {
-    // On mouseover, show the tooltip.
-    // TODO: maybe figure out how to show it at the mouse's position
-    var matrix = obj.getScreenCTM()
-        .translate(+obj.getAttribute("cx"),
-            +obj.getAttribute("cy"));
+    // This is for conpatibility reasons, as getScreenCTM may return
+    // a deprecated SVGMatrix even in newer browsers.
+    const m = obj.getScreenCTM();
+    let matrix = new DOMMatrix([m.a, m.b, m.c, m.d, m.e, m.f])
+
+    // Translate the matrix to point to the top of the current plotbar bar.
+    const barX = parseFloat(obj.getAttribute("x")) + parseFloat(obj.getAttribute("width"));
+    const barY = parseFloat(obj.getAttribute("y"));
+    matrix = matrix.translateSelf(barX, barY);
 
     d3.select("#tooltip")
-        .style("left", (matrix.e) + "px")
-        .style("top", (matrix.f + 300) + "px")
+        .style("left", (matrix.e + 10) + "px")
+        .style("top", (matrix.f + 15) + "px")
         .select("#value")
         .text(d3.select(obj).attr("date") +
             " : " +
