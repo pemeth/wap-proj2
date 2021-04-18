@@ -1,3 +1,8 @@
+/**
+ * Parse dates in the ISO format and return them in the API call format.
+ * @param {string} date is the input date in ISO format.
+ * @returns {string} the same date, only in the valid API call format.
+ */
 function parseDate(date) {
     const sections = date.split("-");
     let sections_new = [];
@@ -13,6 +18,11 @@ function parseDate(date) {
     return sections_new.reverse().join('/');
 }
 
+/**
+ * Builds a valid API call URL for the 'hospital' category (ICU and hospital bed
+ * occupancy) based on user selections.
+ * @returns a valid API call URL.
+ */
 function buildRequestURL() {
     let url = "http://localhost:3000";
 
@@ -58,6 +68,10 @@ function buildRequestURL() {
     return url;
 }
 
+/**
+ * Builds a valid API call URL for the 'tests' category based on user selections.
+ * @returns a valid API call URL.
+ */
 function buildRequestURLTests() {
     let url = "http://localhost:3000/tests";
 
@@ -85,20 +99,25 @@ function buildRequestURLTests() {
     return url;
 }
 
+/**
+ * Shows the appropriate selection settings for the user
+ * based on chosen category ('hospitals' or 'tests').
+ */
 $(document).ready(function() {
     $("#category_selector_hospital").click(function() {
         d3.select("#category_hospital").classed("hidden", false);
         d3.select("#category_tests").classed("hidden", true);
     });
-});
 
-$(document).ready(function() {
     $("#category_selector_tests").click(function() {
         d3.select("#category_tests").classed("hidden", false);
         d3.select("#category_hospital").classed("hidden", true);
     });
 });
 
+/**
+ * Add a `click` event listener to the Submit buttons for each category.
+ */
 $(document).ready(function() {
     $("#send_request").click(function() {
         hospitalPlot();
@@ -110,6 +129,10 @@ $(document).ready(function() {
     });
 });
 
+/**
+ * Sends an API call for data specified by user and plots the results.
+ * Variant for the hospital beds and ICU occupancy.
+ */
 function hospitalPlot() {
     const url = buildRequestURL();
 
@@ -156,6 +179,10 @@ function hospitalPlot() {
         });
 }
 
+/**
+ * Sends an API call for data specified by user and plots the results.
+ * Variant for the covid testing data.
+ */
 function testsPlot() {
     const [svg, width, height] = setUpSVG();
 
