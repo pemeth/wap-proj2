@@ -113,25 +113,11 @@ $(document).ready(function() {
 function hospitalPlot() {
     const url = buildRequestURL();
 
-    var margin = {top: 30, right: 30, bottom: 70, left: 60},
-        width = d3.select("#dataviz svg").node().getBoundingClientRect().width - margin.left - margin.right,
-        height = d3.select("#dataviz svg").node().getBoundingClientRect().height - margin.top - margin.bottom;
-
-    // Remove the previous barplot.
-    d3.select("#dataviz svg g").remove();
-
-    // Append the object that will hold the barplot.
-    var svg = d3.select("#dataviz svg")
-        .append("g")
-            .attr("transform",
-                  "translate(" + margin.left + "," + margin.top + ")");
+    const [svg, width, height] = setUpSVG();
 
     d3.json(url)
         .then(function(data) {
-            let x = d3.scaleBand()
-                .range([0,width])
-                .domain(data.map(function(d) { return d.date; }))
-                .paddingOuter(0.2);
+            const x = setUpXScale(width, data, "date");
             svg.append("g")
                 .attr("transform", "translate(0," + height + ")")
                 .call(
@@ -143,9 +129,7 @@ function hospitalPlot() {
                     .style("text-anchor", "end");
 
             const max = d3.max(data, d => d.value);
-            var y = d3.scaleLinear()
-                .domain([0, max])
-                .range([ height, 0]);
+            const y = setUpYScale(height, max);
             svg.append("g")
                 .call(d3.axisLeft(y));
 
@@ -183,17 +167,7 @@ function hospitalPlot() {
 }
 
 function testsPlot() {
-    var margin = {top: 30, right: 30, bottom: 70, left: 60},
-        width = d3.select("#dataviz svg").node().getBoundingClientRect().width - margin.left - margin.right,
-        height = d3.select("#dataviz svg").node().getBoundingClientRect().height - margin.top - margin.bottom;
-
-    // Remove the previous barplot.
-    d3.select("#dataviz svg g").remove();
-
-    var svg = d3.select("#dataviz svg")
-        .append("g")
-            .attr("transform",
-                  "translate(" + margin.left + "," + margin.top + ")");
+    const [svg, width, height] = setUpSVG();
 
     // The API returns multiple datapoints for each week, so we need
     // to pick one client side. This returns the type of data the user
@@ -205,10 +179,7 @@ function testsPlot() {
     console.log(url);
     d3.json(url)
         .then(function(data) {
-            let x = d3.scaleBand()
-                .range([0,width])
-                .domain(data.map(function(d) { return d.year_week; }))
-                .paddingOuter(0.2);
+            const x = setUpXScale(width, data, "year_week");
             svg.append("g")
                 .attr("transform", "translate(0," + height + ")")
                 .call(
@@ -231,9 +202,7 @@ function testsPlot() {
 
             // Maximum value based on user selected datapoint (data type).
             const max = d3.max(data, d => getValue(d));
-            var y = d3.scaleLinear()
-                .domain([0, max])
-                .range([ height, 0]);
+            const y = setUpYScale(height, max);
             svg.append("g")
                 .call(d3.axisLeft(y));
 
@@ -266,6 +235,60 @@ function testsPlot() {
                         d3.select("#tooltip").classed("hidden", true);
                    });
         });
+}
+
+/**
+ * Deletes the old svg, if needed, and creates a new svg object for the barplots.
+ * @returns {[{},number,number]} an array of the new svg element, its width,
+ *  and its height without margins.
+ */
+function setUpSVG() {
+    var margin = {top: 30, right: 30, bottom: 70, left: 60},
+        width = d3.select("#dataviz svg").node().getBoundingClientRect().width - margin.left - margin.right,
+        height = d3.select("#dataviz svg").node().getBoundingClientRect().height - margin.top - margin.bottom;
+
+    // Remove the previous barplot.
+    d3.select("#dataviz svg g").remove();
+
+    var svg = d3.select("#dataviz svg")
+        .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+    return [svg, width, height];
+}
+
+/**
+ * Sets up and returns a d3 linear scale function for the 'y' axis of the barplot.
+ * @param {number} height the maximum range onto which to map
+ *  the domain - should be the height of the plot.
+ * @param {number} max the maximum value in the scale's domain.
+ * @returns {Function} the linear scale for the 'y' axis.
+ */
+function setUpYScale(height, max) {
+    const y = d3.scaleLinear()
+                .domain([0, max])
+                .range([height, 0]);
+
+    return y;
+}
+
+/**
+ * Sets up and returns a d3 band scale function for the 'x' axis of the barplot.
+ * @param {number} width is the maximum range onto which to map
+ *  the domain - should be the width of the plot.
+ * @param {{}} data is a JSON object parsed by d3 - the domain.
+ * @param {string} data_point specifies the name of the property of
+ *  the `data` object that will be displayed on the 'x' axis.
+ * @returns {Function} the band scale for the 'x' axis.
+ */
+function setUpXScale(width, data, data_point) {
+    const x = d3.scaleBand()
+        .range([0,width])
+        .domain(data.map(function(d) { return d[data_point]; }))
+        .paddingOuter(0.2);
+
+    return x;
 }
 
 // This client app was developped on firefox, where input type "week" does not work,
