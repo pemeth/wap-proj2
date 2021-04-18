@@ -146,21 +146,8 @@ function hospitalPlot() {
                     .attr("date", function(d) { return d.date; })
                     .attr("val", function(d) { return d.value; })
                     .attr("class", "bar")
-                    .on("mouseover", function(d) {
-                        // On mouseover, show the tooltip.
-                        // TODO: maybe figure out how to show it at the mouse's position
-                        var matrix = this.getScreenCTM()
-                            .translate(+this.getAttribute("cx"),
-                                +this.getAttribute("cy"));
-
-                        d3.select("#tooltip")
-                            .style("left", (matrix.e) + "px")
-                            .style("top", (matrix.f + 300) + "px")
-                            .select("#value")
-                            .text(d3.select(this).attr("date") +
-                                " : " +
-                                d3.select(this).attr("val"));
-                        d3.select("#tooltip").classed("hidden", false);
+                    .on("mouseover", function() {
+                        setBarMouseOverEvent(this);
                    })
                    .on("mouseout", function() {
                         d3.select("#tooltip").classed("hidden", true);
@@ -221,26 +208,35 @@ function testsPlot() {
                     .attr("date", function(d) { return d.year_week; })
                     .attr("val", function(d) { return String(getValue(d)); })
                     .attr("class", "bar")
-                    .on("mouseover", function(d) {
-                        // On mouseover, show the tooltip.
-                        // TODO: same as in hospitalPlot()
-                        var matrix = this.getScreenCTM()
-                            .translate(+this.getAttribute("cx"),
-                                +this.getAttribute("cy"));
-
-                        d3.select("#tooltip")
-                            .style("left", (matrix.e) + "px")
-                            .style("top", (matrix.f + 300) + "px")
-                            .select("#value")
-                            .text(d3.select(this).attr("date") +
-                                " : " +
-                                d3.select(this).attr("val"));
-                        d3.select("#tooltip").classed("hidden", false);
+                    .on("mouseover", function() {
+                        setBarMouseOverEvent(this);
                    })
                    .on("mouseout", function() {
                         d3.select("#tooltip").classed("hidden", true);
                    });
         });
+}
+
+/**
+ * Used to set up the mouseover event handler for the individual bar plot bars.
+ * This event handles showing the tooltip.
+ * @param {{}} obj is the current HTML object, for which to set this event handler for.
+ */
+function setBarMouseOverEvent(obj) {
+    // On mouseover, show the tooltip.
+    // TODO: maybe figure out how to show it at the mouse's position
+    var matrix = obj.getScreenCTM()
+        .translate(+obj.getAttribute("cx"),
+            +obj.getAttribute("cy"));
+
+    d3.select("#tooltip")
+        .style("left", (matrix.e) + "px")
+        .style("top", (matrix.f + 300) + "px")
+        .select("#value")
+        .text(d3.select(obj).attr("date") +
+            " : " +
+            d3.select(obj).attr("val"));
+    d3.select("#tooltip").classed("hidden", false);
 }
 
 /**
