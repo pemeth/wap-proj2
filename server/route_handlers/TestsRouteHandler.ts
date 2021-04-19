@@ -11,21 +11,23 @@ import { Request, Response } from "express";
 import { TestDatas } from "../interfaces/tests_data";
 
 /**
- * Class that will load data of data workers and add routes to the application
+ * Class that will load data of data workers and add routes to the application.
+ * @class
  */
 @singleton()
 export class TestsRouteHandler {
     private tests_data_worker: TestsDataWorker;
 
     /**
-     * Instantiate singleton object for holding covid test data
+     * Instantiate singleton object for holding covid test data.
+     * @constructor
      */
     constructor() {
         this.tests_data_worker = container.resolve(TestsDataWorker);
     }
 
     /**
-     * Load data for data worker
+     * Load data for data worker.
      * @returns {Promise<void>} Returns promise that will be resolved, when data are loaded, or rejected when loading failes
      */
     public loadData(): Promise<void> {
@@ -41,7 +43,7 @@ export class TestsRouteHandler {
     }
 
     /**
-     * Add routes to server
+     * Add routes to server.
      * @param {Express} app Instance of express web server
      */
     public addRoutes(app: Express) {
@@ -49,7 +51,7 @@ export class TestsRouteHandler {
     }
 
     /**
-     * Add all types of routes that start with /tests
+     * Add all types of routes that start with /tests.
      * @param {Express} app Instance of express web server
      */
     private addTestsRoutes(app: Express): void {

@@ -11,21 +11,23 @@ import { Request, Response } from "express";
 import { BedDatas, ICUDatas } from "../interfaces/hospital_data";
 
 /**
- * Class that will load data of data workers and add routes to the application
+ * Class that will load data of data workers and add routes to the application.
+ * @class
  */
 @singleton()
 export class HospitalRouteHandler {
     private hospital_data_worker: HospitalDataWorker;
 
     /**
-     * Instantiate singleton object for holding hospital data
+     * Instantiate singleton object for holding hospital data.
+     * @constructor
      */
     constructor() {
         this.hospital_data_worker = container.resolve(HospitalDataWorker);
     }
 
     /**
-     * Load data for data worker
+     * Load data for data worker.
      * @returns {Promise<void>} Returns promise that will be resolved, when data are loaded, or rejected when loading failes
      */
     public loadData(): Promise<void> {
@@ -41,7 +43,7 @@ export class HospitalRouteHandler {
     }
 
     /**
-     * Add routes to server
+     * Add routes to server.
      * @param {Express} app Instance of express web server
      */
     public addRoutes(app: Express) {
@@ -50,7 +52,7 @@ export class HospitalRouteHandler {
     }
 
     /**
-     * Add all types of routes that start with /beds
+     * Add all types of routes that start with /beds.
      * @param {Express} app Instance of express web server
      */
     private addBedRoutes(app: Express): void {
@@ -148,7 +150,7 @@ export class HospitalRouteHandler {
     }
 
     /**
-     * Add all types of routes that start with /icu
+     * Add all types of routes that start with /icu.
      * @param {Express} app Instance of express web server
      */
     private addICURoutes(app: Express): void {
@@ -246,7 +248,7 @@ export class HospitalRouteHandler {
     }
 
     /**
-     * Validate if given date in request, contains all values
+     * Validate if given date in request, contains all values.
      * @param {string|undefined} day Request param day
      * @param {string|undefined} month Request param month
      * @param {string|undefined} year Request param year
@@ -273,7 +275,7 @@ export class HospitalRouteHandler {
     }
 
     /**
-     * Generate date from date given in request
+     * Generate date from date given in request.
      * @param {string} day Number of day in month as string
      * @param {string} month Number of month in year as string
      * @param {string} year Year as string

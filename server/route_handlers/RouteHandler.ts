@@ -12,7 +12,8 @@ import cors from 'cors';
 import { TestsRouteHandler } from "./TestsRouteHandler";
 
 /**
- * Class for instantiating all routes and loading data for each data worker
+ * Class for instantiating all routes and loading data for each data worker.
+ * @class
  */
 @singleton()
 export class RouteHandler {
@@ -20,7 +21,8 @@ export class RouteHandler {
     private tests_route_handler: TestsRouteHandler;
 
     /**
-     * Instantiate singleton objects for handling routes
+     * Instantiate singleton objects for handling routes.
+     * @constructor
      */
     constructor() {
         this.hospital_route_handler = container.resolve(HospitalRouteHandler);
@@ -28,7 +30,7 @@ export class RouteHandler {
     }
     
     /**
-     * Load data for each data worker we have defined
+     * Load data for each data worker we have defined.
      * @returns {Promise<void>} Promise that will resolve when all data are loaded, reject when one of them failes
      */
     public loadDataWorkers(): Promise<void> {
@@ -47,7 +49,7 @@ export class RouteHandler {
     }
 
     /**
-     * Add middleware and routes to the application
+     * Add middleware and routes to the application.
      * @param {Express} app Instance of express web server
      */
     public adddRoutes(app: Express): void {
