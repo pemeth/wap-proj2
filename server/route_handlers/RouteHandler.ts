@@ -1,3 +1,9 @@
+/**
+ * Module for the `RouteHandler` class, which takes care of instantiating
+ * specific route handlers.
+ * @module
+ * @author Matus Skuta <xskuta04@stud.fit.vutbr.cz>
+ */
 import { container, singleton } from "tsyringe";
 import { Express } from "express-serve-static-core";
 import { json, Response } from "express";

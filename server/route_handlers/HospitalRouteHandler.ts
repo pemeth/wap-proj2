@@ -1,3 +1,9 @@
+/**
+ * Module for the `HospitalRouteHandler` class, which handles `/beds` and `/icu`
+ * API request routes.
+ * @module
+ * @author Matus Skuta <xskuta04@stud.fit.vutbr.cz>
+ */
 import { container, singleton } from "tsyringe";
 import { HospitalDataWorker } from "../json_data_workers/hospital_data_worker";
 import { Express } from "express-serve-static-core";

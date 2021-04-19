@@ -1,3 +1,9 @@
+/**
+ * Module for the `TestsRouteHandler` class, which handles `/tests`
+ * API request routes.
+ * @module
+ * @author Matus Skuta <xskuta04@stud.fit.vutbr.cz>
+ */
 import { container, singleton } from "tsyringe";
 import { Express } from "express-serve-static-core";
 import { TestsDataWorker } from "../json_data_workers/tests_data_worker";
