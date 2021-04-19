@@ -149,7 +149,7 @@ export class HospitalDataWorker {
             if (country === null) {
                 return reject();
             }
-            
+
             // Filter out array of BedData that are from given country
             return resolve(this.hospital_data.filter((data: BedData) => {
                 return data.country.toLowerCase() === country;
@@ -172,7 +172,7 @@ export class HospitalDataWorker {
             if (country === null) {
                 return reject();
             }
-    
+
             // Filter out array of BedData that are from given country and with given date
             return resolve(this.hospital_data.filter((data: BedData) => {
                 return data.country.toLowerCase() === country && (new Date(data.date)).getTime() === date.getTime();
@@ -196,7 +196,7 @@ export class HospitalDataWorker {
             if (country === null) {
                 return reject();
             }
-    
+
             // Filter out array of BedData that are from given country and between given dates
             return resolve(this.hospital_data.filter((data: BedData) => {
                 const date: number = new Date(data.date).getTime();
@@ -214,12 +214,12 @@ export class HospitalDataWorker {
         return new Promise<ICUDatas>((resolve, reject) => {
             // Convert country code into country name
             const country: string | null = this.countryCodeToCountry(country_code);
-            
+
             // Country with given code not found
             if (country === null) {
                 return reject();
             }
-            
+
             // Filter out array of ICUData that are from given country
             return resolve(this.icu_data.filter((data: ICUData) => {
                 return data.country.toLowerCase() === country;
@@ -237,12 +237,12 @@ export class HospitalDataWorker {
         return new Promise<ICUDatas>((resolve, reject) => {
             // Convert country code into country name
             const country: string | null = this.countryCodeToCountry(country_code);
-                
+
             // Country with given code not found
             if (country === null) {
                 return reject();
             }
-    
+
             // Filter out array of ICUData that are from given country and with given date
             return resolve(this.icu_data.filter((data: ICUData) => {
                 return data.country.toLowerCase() === country && (new Date(data.date)).getTime() === date.getTime();
@@ -261,12 +261,12 @@ export class HospitalDataWorker {
         return new Promise<ICUDatas>((resolve, reject) => {
             // Convert country code into country name
             const country: string | null = this.countryCodeToCountry(country_code);
-                
+
             // Country with given code not found
             if (country === null) {
                 return reject();
             }
-    
+
             // Filter out array of ICUData that are from given country and between given dates
             return resolve(this.icu_data.filter((data: ICUData) => {
                 const date: number = new Date(data.date).getTime();
