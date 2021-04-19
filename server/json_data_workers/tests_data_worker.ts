@@ -14,6 +14,7 @@ import { IncomingMessage } from "node:http";
 
 /**
  * Class holding loaded covid tests JSON data, that will filter out and return data based on given conditions
+ * @class
  */
 @singleton()
 export class TestsDataWorker {
