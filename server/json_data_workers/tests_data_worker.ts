@@ -13,7 +13,7 @@ import { schedule } from "node-cron";
 import { IncomingMessage } from "node:http";
 
 /**
- * Class holding loaded covid tests JSON data, that will filter out and return data based on given conditions
+ * Class holding loaded covid tests JSON data, that will filter out and return data based on given conditions.
  * @class
  */
 @singleton()
@@ -25,7 +25,7 @@ export class TestsDataWorker {
     constructor() { }
 
     /**
-     * Check if one of object received from web request is correct
+     * Check if one of object received from web request is correct.
      * @param {JsonTestData} data JSON Data object
      * @returns {boolean} True when data are correct, false otherwise
      */
@@ -44,7 +44,7 @@ export class TestsDataWorker {
     }
 
     /**
-     * Send GET request to JSON page, that contains covid tests data
+     * Send GET request to JSON page, that contains covid tests data.
      * @returns {Promise<void>} Resolves when data are loaded and processed, rejects otherwise
      */
     public loadData(): Promise<void> {
@@ -103,7 +103,7 @@ export class TestsDataWorker {
     }
 
     /**
-     * Check if last-modified header was changed, then load new JSON data
+     * Check if last-modified header was changed, then load new JSON data.
      */
     private updateData(): void {
         // Send HEAD request
@@ -130,7 +130,7 @@ export class TestsDataWorker {
     }
 
     /**
-     * Filter out covid test data based on country code
+     * Filter out covid test data based on country code.
      * @param {string} country_code Country code representing country (SK, CZ, ...)
      * @returns {Promise<TestDatas>} Resolves when country code is valid, and return array of TestData, reject otherwise
      */
@@ -152,7 +152,7 @@ export class TestsDataWorker {
     }
 
     /**
-     * Filter out covid test data based on country code and year
+     * Filter out covid test data based on country code and year.
      * @param {string} country_code Country code representing country (SK, CZ, ...)
      * @param {string} year Year from which we want given data
      * @returns {Promise<TestDatas>} Resolves when country code and year are valid, and return array of TestData, reject otherwise
@@ -174,7 +174,7 @@ export class TestsDataWorker {
     }
 
     /**
-     * Filter out covid test data based on country code and given year and week
+     * Filter out covid test data based on country code and given year and week.
      * @param {string} country_code Country code representing country (SK, CZ, ...)
      * @param {string} year Year from which we want given data
      * @param {string} week Week from when we want given data, correct values are from 1 to 53
@@ -201,7 +201,7 @@ export class TestsDataWorker {
     }
 
     /**
-     * Convert country code into country
+     * Convert country code into country.
      * @param {string} country_code Country code representing country (SK, CZ, ...)
      * @returns {string|null} Returns country name or null when given country code is invalid
      */
@@ -224,7 +224,7 @@ export class TestsDataWorker {
     }
 
     /**
-     * Generates year_week string in format <year>-W<week>
+     * Generates year_week string in format <year>-W<week>.
      * @param {string} year Year in string format
      * @param {string }week Number of week in string format
      * @returns {string|null} Returns formatted string or null when given year or week are not number
