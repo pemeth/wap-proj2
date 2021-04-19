@@ -31,3 +31,7 @@ By using command `npm run build`, the content of server is compiled into `Javasc
 ## Run
 
 By using command `npm run start`, project will be compiled and run, which will start server, with API on port `3000`.
+
+## Generate documentation
+
+Hand-written documentation is provided in the `/doc` directory, however JSDoc can be used to generate code documentation by running `npm run doc`. This command is to be executed from the same directory as this README. The output is placed in the `/doc/gen` directory, where `index.html` is the entrypoint to the generated documentation.
