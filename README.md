@@ -35,3 +35,7 @@ By using command `npm run start`, project will be compiled and run, which will s
 ## Generate documentation
 
 Hand-written documentation is provided in the `/doc` directory, however JSDoc can be used to generate code documentation by running `npm run doc`. This command is to be executed from the same directory as this README. The output is placed in the `/doc/gen` directory, where `index.html` is the entrypoint to the generated documentation.
+
+# The client
+
+An example client application is also included in the project under the `/client` direcory. It may be used to test the web API and provides an example of how the API could be used by a third party developer. Its functionality and implementation is explained in more detail in the PDF documentation in the `/doc` directory.
