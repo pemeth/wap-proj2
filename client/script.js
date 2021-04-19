@@ -21,7 +21,7 @@ function parseDate(date) {
 /**
  * Builds a valid API call URL for the 'hospital' category (ICU and hospital bed
  * occupancy) based on user selections.
- * @returns a valid API call URL.
+ * @returns {string} a valid API call URL.
  */
 function buildRequestURL() {
     let url = "http://localhost:3000";
@@ -70,7 +70,7 @@ function buildRequestURL() {
 
 /**
  * Builds a valid API call URL for the 'tests' category based on user selections.
- * @returns a valid API call URL.
+ * @returns {string} a valid API call URL.
  */
 function buildRequestURLTests() {
     let url = "http://localhost:3000/tests";
@@ -281,7 +281,7 @@ function setBarMouseOverEvent(obj) {
 
 /**
  * Deletes the old svg, if needed, and creates a new svg object for the barplots.
- * @returns {[{},number,number]} an array of the new svg element, its width,
+ * @returns {Array} an array of the new svg element, its width,
  *  and its height without margins.
  */
 function setUpSVG() {
