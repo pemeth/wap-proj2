@@ -1,7 +1,7 @@
 /**
- * File for the `HospitalDataWorker` class, which handles data parsing
+ * Module for the `HospitalDataWorker` class, which handles data parsing
  * and filtering for the `/beds` and `/icu` API calls.
- * @file hospital_data_worker
+ * @module
  * @author Matus Skuta <xskuta04@stud.fit.vutbr.cz>
  */
 import { get } from "https";

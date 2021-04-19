@@ -1,7 +1,7 @@
 /**
- * File for the `TestsDataWorker` class, which handles data parsing
+ * Module for the `TestsDataWorker` class, which handles data parsing
  * and filtering for the `/tests` API call.
- * @file hospital_data_worker
+ * @module
  * @author Matus Skuta <xskuta04@stud.fit.vutbr.cz>
  */
 import { singleton } from "tsyringe";
