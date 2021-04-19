@@ -108,14 +108,14 @@ export class HospitalRouteHandler {
 
                 return;
             });
-        
+
         // Add GET route for /beds/<country>/<date-start>/<date-end>
         app.route('/beds/:country/:day_from/:month_from/:year_from/:day_to/:month_to/:year_to')
             .get((req: Request, res: Response) => {
                 // Country is missing
                 if (req.params.country === undefined || typeof req.params.country !== 'string') {
                     return res.status(400).send();
-                }   
+                }
 
                 // Validate from date
                 if (!this.validate_date(req.params.day_from, req.params.month_from, req.params.year_from)) {
@@ -213,7 +213,7 @@ export class HospitalRouteHandler {
                 // Country is missing
                 if (req.params.country === undefined || typeof req.params.country !== 'string') {
                     return res.status(400).send();
-                }   
+                }
 
                 // Validate from date
                 if (!this.validate_date(req.params.day_from, req.params.month_from, req.params.year_from)) {

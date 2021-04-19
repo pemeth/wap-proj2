@@ -28,7 +28,7 @@ export class RouteHandler {
         this.hospital_route_handler = container.resolve(HospitalRouteHandler);
         this.tests_route_handler = container.resolve(TestsRouteHandler);
     }
-    
+
     /**
      * Load data for each data worker we have defined.
      * @returns {Promise<void>} Promise that will resolve when all data are loaded, reject when one of them failes
@@ -58,7 +58,7 @@ export class RouteHandler {
 
         // Add middleware for adding 'Access-Control-Allow-Origin: *' header
         app.use(cors());
-        
+
         // Set JSON formatted output
         app.set('json spaces', 2);
 
