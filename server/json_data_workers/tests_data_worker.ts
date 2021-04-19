@@ -1,3 +1,9 @@
+/**
+ * File for the `TestsDataWorker` class, which handles data parsing
+ * and filtering for the `/tests` API call.
+ * @file hospital_data_worker
+ * @author Matus Skuta <xskuta04@stud.fit.vutbr.cz>
+ */
 import { singleton } from "tsyringe";
 import { JsonTestData, JsonTestDatas, TestData, TestDatas } from "../interfaces/tests_data";
 import { get } from "https";

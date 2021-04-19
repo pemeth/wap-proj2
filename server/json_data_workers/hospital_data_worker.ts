@@ -1,3 +1,9 @@
+/**
+ * File for the `HospitalDataWorker` class, which handles data parsing
+ * and filtering for the `/beds` and `/icu` API calls.
+ * @file hospital_data_worker
+ * @author Matus Skuta <xskuta04@stud.fit.vutbr.cz>
+ */
 import { get } from "https";
 import { byInternet, CountryCode } from "country-code-lookup";
 import { singleton } from "tsyringe";
