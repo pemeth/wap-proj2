@@ -13,7 +13,8 @@ import { schedule } from "node-cron";
 import { IncomingMessage } from "node:http";
 
 /**
- * Class holding loaded hospital JSON data, that will filter out and return data based on given conditions
+ * Class holding loaded hospital JSON data, that will filter out and return data based on given conditions.
+ * @class
  */
 @singleton()
 export class HospitalDataWorker {
@@ -25,7 +26,7 @@ export class HospitalDataWorker {
     constructor() { }
 
     /**
-     * Check if one of object received from web request is correct
+     * Check if one of object received from web request is correct.
      * @param {HospitalData} data JSON Data object
      * @param {string} indicator Type of indicator we are looking for
      * @returns {boolean} True when data are correct, false otherwise
@@ -40,7 +41,7 @@ export class HospitalDataWorker {
     }
 
     /**
-     * Send GET request to JSON page, that contains hospital data
+     * Send GET request to JSON page, that contains hospital data.
      * @returns {Promise<void>} Resolves when data are loaded and processed, rejects otherwise
      */
     public loadData(): Promise<void> {
@@ -109,7 +110,7 @@ export class HospitalDataWorker {
     }
 
     /**
-     * Check if last-modified header was changed, then load new JSON data
+     * Check if last-modified header was changed, then load new JSON data.
      */
     private updateData(): void {
         // Send HEAD request
@@ -136,7 +137,7 @@ export class HospitalDataWorker {
     }
 
     /**
-     * Filter out bed data based on country code
+     * Filter out bed data based on country code.
      * @param {string} country_code Country code representing country (SK, CZ, ...)
      * @returns {Promise<BedDatas>} Resolves when country code is valid, and return array of BedData, reject otherwise
      */
@@ -158,7 +159,7 @@ export class HospitalDataWorker {
     }
 
     /**
-     * Filter out bed data based on country code and given date
+     * Filter out bed data based on country code and given date.
      * @param {string} country_code Country code representing country (SK, CZ, ...)
      * @param {Date} date Date object representing date from when we want data
      * @returns {Promise<BedDatas>} Resolves when country code and date are valid, and return array of BedData, reject otherwise
@@ -181,7 +182,7 @@ export class HospitalDataWorker {
     }
 
     /**
-     * Filter out bed data based on country code and given date
+     * Filter out bed data based on country code and given date.
      * @param {string} country_code Country code representing country (SK, CZ, ...)
      * @param {Date} date_from Date object representing date from when we want data
      * @param {Date} date_to Date object representing date until when we want data
@@ -206,7 +207,7 @@ export class HospitalDataWorker {
     }
 
     /**
-     * Filter out icu data based on country code
+     * Filter out icu data based on country code.
      * @param {string} country_code Country code representing country (SK, CZ, ...)
      * @returns {Promise<ICUDatas>} Resolves when country code is valid, and return array of ICUData, reject otherwise
      */
@@ -228,7 +229,7 @@ export class HospitalDataWorker {
     }
 
     /**
-     * Filter out icu data based on country code and given date
+     * Filter out icu data based on country code and given date.
      * @param {string} country_code Country code representing country (SK, CZ, ...)
      * @param {Date} date ICUDatas object representing date from when we want data
      * @returns {Promise<BedDatas>} Resolves when country code and date are valid, and return array of ICUData, reject otherwise
@@ -251,7 +252,7 @@ export class HospitalDataWorker {
     }
 
     /**
-     * Filter out icu data based on country code and given date
+     * Filter out icu data based on country code and given date.
      * @param {string} country_code Country code representing country (SK, CZ, ...)
      * @param {Date} date_from Date object representing date from when we want data
      * @param {Date} date_to Date object representing date until when we want data
@@ -276,7 +277,7 @@ export class HospitalDataWorker {
     }
 
     /**
-     * Convert country code into country
+     * Convert country code into country.
      * @param {string} country_code Country code representing country (SK, CZ, ...)
      * @returns {string|null} Returns country name or null when given country code is invalid
      */
