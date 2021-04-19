@@ -2,5 +2,8 @@ import "reflect-metadata";
 import { container } from "tsyringe";
 import { Server } from "./server";
 
-// Create single instance of server
+/**
+ * Holds the only instance of the server.
+ * @var {Server}
+ */
 const server = container.resolve(Server);

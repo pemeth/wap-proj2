@@ -1,3 +1,9 @@
+/**
+ * Contains the class `Server` defining server behaviour
+ * and instantiating relevant classes.
+ * @module
+ * @author Matus Skuta <xskuta04@stud.fit.vutbr.cz>
+ */
 import express, { Router } from "express";
 import { Express } from "express-serve-static-core";
 import { container, singleton } from "tsyringe";
@@ -5,7 +11,8 @@ import { DEFAULT_PORT } from "./config";
 import { RouteHandler } from "./route_handlers/RouteHandler";
 
 /**
- * Class that will load JSON data, routes with server and start listening for requests
+ * Class that will load JSON data, routes with server and start listening for requests.
+ * @class
  */
 @singleton()
 export class Server {
@@ -14,7 +21,8 @@ export class Server {
     private route_handler: RouteHandler;
 
     /**
-     * Instantiate express app and other objects that will be used throughout application
+     * Instantiate express app and other objects that will be used throughout application.
+     * @constructor
      */
     constructor() {
         this.app = express();
@@ -30,7 +38,7 @@ export class Server {
     }
 
     /**
-     * Open server for incoming traffic on default port
+     * Open server for incoming traffic on default port.
      */
     private listen(): void {
         this.app.use("/", Router);
