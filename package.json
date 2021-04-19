@@ -9,7 +9,7 @@
     "build": "cd server && tsc",
     "start": "npm run build && TZ='UTC' npm run server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "doc": "npm run build && jsdoc ./dist -r -d ./doc/gen README.md"
+    "doc": "npm run build && jsdoc ./client/script.js ./dist -r -d ./doc/gen README.md"
   },
   "repository": {
     "type": "git",

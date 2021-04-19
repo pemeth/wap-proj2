@@ -1,4 +1,13 @@
 /**
+ * This module contains functions for the example client-side application
+ * utilizing the server-side API. Though it is not part of the API server,
+ * it is included in the automatically generated documentation for
+ * completeness' sake.
+ * @module client/script
+ * @author Patrik Nemeth <xnemet04@stud.fit.vutbr.cz>
+ */
+
+/**
  * Parse dates in the ISO format and return them in the API call format.
  * @param {string} date is the input date in ISO format.
  * @returns {string} the same date, only in the valid API call format.
