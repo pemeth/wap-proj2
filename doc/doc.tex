@@ -3,6 +3,7 @@
 \usepackage[IL2]{fontenc}
 \usepackage[left=1.5cm, top=2cm, text={18cm, 25cm}]{geometry}
 \usepackage{hyperref}
+\usepackage{alltt}
 
 \newcommand{\code}{\texttt}
 
@@ -36,5 +37,104 @@
     all other dependencies will be automatically installed. The example client
     application requires an up-to-date web browser. All~installation instructions
     can be found in the \code{README.md} file in the top level directory of the project.
+
+    \section{The server}
+    The web server is built on \emph{Node.js} and written in \emph{TypeScript}.
+    It is divided into multiple files in the \code{/server} directory, where
+    the entrypoint to the application, \code{index.ts}, is located. This contains
+    a single instantiation of the web server that uses the \emph{Express} framework.
+    The server itself is wrapped in the \code{Server} class in~charge of route handler
+    instantiaton, as well as listening on port 3000.
+
+    Route handlers are located in the \code{/server/route\_handlers} directory.
+    The class \code{RouteHandler} instantiates all the API-call-specific route handlers
+    (\code{HospitalRouteHandler} and \code{TestsRouteHandler}). These are in charge of
+    specifying the structure of all the available API calls (explained in section
+    \ref{sec:api_structure}) and the behaviour of how to handle these calls. As this web
+    API is meant to act like a form of data acquisition tool, the only HTTP method
+    supported is the \code{GET} method.
+
+    Each of the specific route handlers contain an instance of data workers
+    (found in directory \newline \code{/server/json\_data\_workers}), which implement methods for
+    loading and filtering the raw JSON data from the original source. This data is loaded
+    every time the server is started. If the server is not shut down for an extended period,
+    it will periodically send a \code{HEAD} request to the source server and if the
+    \code{Last-Modified} response field specifies a more recent date than during
+    the last data download, the new data is downloaded.
+
+    \subsection{API call structure} \label{sec:api_structure}
+    The API calls supported by this web server are all for the \code{GET} HTTP method.
+
+    \begin{alltt}
+    /beds
+        Hospital bed occupancies by COVID-19 patients per country.
+        Source: https://data.europa.eu/euodp/en/data/dataset/
+                    hospital-and-icu-admission-rates-and-occupancy-for-covid-19
+        Routes:
+            /<country>
+            /<country>/<date>
+            /<country>/<date-start>/<date-end>
+        Where:
+            <country>   is a country code (SK, DE, ...),
+            <date>      is in the form of /<day>/<month>/<year>,
+                        where each of the specified fields are integers.
+
+    /icu
+        The occupancy of intensive care units by COVID-19 patients per country.
+        Source: https://data.europa.eu/euodp/en/data/dataset/
+                    hospital-and-icu-admission-rates-and-occupancy-for-covid-19
+        Routes:
+            /<country>
+            /<country>/<date>
+            /<country>/<date-start>/<date-end>
+        Where:
+            <country>   is a country code (SK, DE, ...),
+            <date>      is in the form of /<day>/<month>/<year>,
+                        where each of the specified fields are integers.
+
+    /tests
+        Weekly COVID-19 test counts, new case counts, testing rates,
+        and positivity rates per country.
+        Source: https://data.europa.eu/euodp/en/data/dataset/
+                    covid-19-testing
+        Routes:
+            /<country>
+            /<country>/<year>
+            /<country>/<year>/<week>
+        Where:
+            <country>   is a country code (SK, DE, ...),
+            <year>      is the requested year, by which to filter data,
+            <week>      is the requested week number of year, by which to filter data.
+    \end{alltt}
+
+    As an example, the URI \code{/beds/at/31/12/2020} would return hospital bed occupancy
+    in Austria for the last day of 2020. The response structure is explained in
+    section \ref{sec:api_response}.
+
+    \subsection{API response structure} \label{sec:api_response}
+    The server always returns data in the form of a JSON as an array of objects.
+    Below are the documented objects contained in the JSON.\newline
+    Objects returned by \code{/beds} and \code{/icu} calls and their derivatives
+    have the following structure:
+    \begin{alltt}
+    \{
+        country: (string),  The full country name.
+        date: (string),     Date in the form "\{yyyy\}-\{mm\}-\{dd\}".
+        value: (integer)    The value for that day. Meaning depends on the API call.
+    \}
+    \end{alltt}
+    Objects returned by \code{/tests} calls and its derivatives
+    have the following structure:
+    \begin{alltt}
+    \{
+        country: (string),          The full country name.
+        year_week: (string),        The year and week in the form "\{yyyy\}-W\{ww\}".
+        new_cases: (integer),       New cases for that week.
+        tests_done: (integer),      Tests done that week.
+        population: (integer),      Population of the country.
+        testing_rate: (string),     The testing rate for that week.
+        positivity_rate: (string)   The test positivity rate for that week.
+    \}
+    \end{alltt}
 
 \end{document}
