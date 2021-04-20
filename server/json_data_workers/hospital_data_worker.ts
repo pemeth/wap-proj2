@@ -3,6 +3,7 @@
  * and filtering for the `/beds` and `/icu` API calls.
  * @module
  * @author Matus Skuta <xskuta04@stud.fit.vutbr.cz>
+ * @author Patrik Nemeth <xnemet04@stud.fit.vutbr.cz>
  */
 import { get } from "https";
 import { byInternet, CountryCode } from "country-code-lookup";
