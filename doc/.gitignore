@@ -1,2 +1,9 @@
 # Directory for JSDoc generated documentation.
 gen
+
+# Latex output files. The PDF will be kept here until the final
+# version of the documentation.
+*.aux
+*.log
+*.out
+*.pdf
