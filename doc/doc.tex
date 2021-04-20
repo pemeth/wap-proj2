@@ -137,4 +137,30 @@
     \}
     \end{alltt}
 
+    \section{The client}
+    The client application can be found in the \code{/client} directory. It serves as
+    an example of how the web API could be used by a third party. The application
+    visualizes data received from the server, where the API request is built based on
+    the user's input. The web server must be running for the client application to
+    be able to fetch data.
+
+    The application is run by simply opening the \code{index.html} file in a web browser.
+    The user may then pick from two categories - \emph{Hospitals} and \emph{Tests}. These
+    categories have different options. A shared option, however, is the country selection
+    that specifies which country's data should be visualized.
+
+    The \emph{Hospitals} category has options for showing hospital admissions or ICU
+    admissions in a time frame. The time frame is selected by the two date selectors,
+    where the first selects the beginning of the time frame and the second its end.
+    If only the first is used to select a date, then every day since then until today
+    is visualized. If only the second is selected, then only that one day is visualized.
+    If none are selected, all the available data is visualized.
+
+    The \emph{Tests} category has options for showing new cases, tests done, testing rates,
+    and positivity rates in a time frame. The time frame resulotion in this category is
+    weekly. If the year selector has a specific year selected and the week selector specifies
+    the whole year, then that year is visualized. If both have specific values selected,
+    then just that week is shown. If the "overall" option is selected in the year selector,
+    then all available data is visualized.
+
 \end{document}
