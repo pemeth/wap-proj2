@@ -18,4 +18,23 @@
         the project.
     \end{center}
 
+    \section{Overview}
+    This project aims to implement a web API capable of handling requests for some of
+    the COVID-19 related data available at the
+    \href{https://data.europa.eu/euodp/en/data/group/covid-19-coronavirus-epidemic?groups=covid-19-coronavirus-epidemic}
+        {EU Open Data Portal}\footnote{Full link: \code{https://data.europa.eu/euodp/en/data/group/covid-19-coronavirus-epidemic?groups=\newline{}covid-19-coronavirus-epidemic}}.
+    The specific data accessible by the API in this implementation is daily hospital bed
+    occupancy by COVID-19 patients, daily ICU (intensive care unit) COVID-19 patient
+    admissions, and weekly COVID-19 tesing data that includes the number of new cases,
+    number of tests done, and testing and positivity rates.
+
+    The project is divided into two parts - the server providing the API and a simple
+    client web application serving as an example for the possible usage of the API.
+
+    \subsection{Requirements}
+    The server requires \emph{Node.js} version \code{14.x} with the \emph{npm} package manager, with which
+    all other dependencies will be automatically installed. The example client
+    application requires an up-to-date web browser. All~installation instructions
+    can be found in the \code{README.md} file in the top level directory of the project.
+
 \end{document}
