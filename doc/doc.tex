@@ -38,6 +38,21 @@
     application requires an up-to-date web browser. All~installation instructions
     can be found in the \code{README.md} file in the top level directory of the project.
 
+    The automatically installed packages are NOT installed systemwide. These packages are:
+    \begin{itemize}
+        \item \code{cors}: used for handling cross-origin resource requests,
+        \item \code{country-code-lookup}: the API uses country codes and this provides a simple
+            way to decode the country codes into country names,
+        \item \code{express}: used as the main web framework. Handles listening for traffic and
+            easier URI routing,
+        \item \code{jsdoc}: for generating code documentation,
+        \item \code{node-cron}: scheduling of checks for new data,
+        \item \code{reflect-metadata}: dependency of \code{tsyringe} for class decoration (every class
+            is a singleton),
+        \item \code{tsyringe}: correct singleton class instantiation - makes sure
+            that the classes are not instantiated multiple times.
+    \end{itemize}
+
     \section{The server}
     The web server is built on \emph{Node.js} and written in \emph{TypeScript}.
     It is divided into multiple files in the \code{/server} directory, where
